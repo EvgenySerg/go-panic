@@ -1,11 +1,16 @@
-package go-panic
+package gopanic
 
+import (
+	"fmt"
+	"runtime"
+	"strings"
+)
 
 func Identify() string {
 	var name, file string
 	var line int
 	var pc [16]uintptr
-	
+
 	n := runtime.Callers(3, pc[:])
 	for _, pc := range pc[:n] {
 		fn := runtime.FuncForPC(pc)
@@ -18,13 +23,13 @@ func Identify() string {
 			break
 		}
 	}
-	
+
 	switch {
 	case name != "":
 		return fmt.Sprintf("%v:%v", name, line)
 	case file != "":
 		return fmt.Sprintf("%v:%v", file, line)
 	}
-	
+
 	return fmt.Sprintf("pc:%x", pc)
 }
