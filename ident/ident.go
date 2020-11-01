@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// Identify returns name of package, file name and line number of place where panic occurs
 func Identify() string {
 	var name, file string
 	var line int
@@ -24,12 +25,5 @@ func Identify() string {
 		}
 	}
 
-	switch {
-	case name != "":
-		return fmt.Sprintf("%v:%v", name, line)
-	case file != "":
-		return fmt.Sprintf("%v:%v", file, line)
-	}
-
-	return fmt.Sprintf("pc:%x", pc)
+	return fmt.Sprintf("name: %v, file: %v:%v", name, file, line)
 }
