@@ -1,4 +1,4 @@
-package gopanic
+package ident
 
 import (
 	"fmt"
